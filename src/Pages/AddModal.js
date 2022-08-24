@@ -1,8 +1,12 @@
 import React, { useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import useFetch from '../Hooks/useFetch';
 
 
-const AddModal = ({ show, handleClose }) => {
+const AddModal = ({ show, handleClose, setShow }) => {
+
+    const { postMethod } = useFetch();
+    
     const nameRef = useRef();
     const emailRef = useRef();
     const phoneRef = useRef();
@@ -14,7 +18,10 @@ const AddModal = ({ show, handleClose }) => {
         const email = emailRef.current.value;
         const phone = phoneRef.current.value;
         const amount = amountRef.current.value;
-        console.log(name, email, phone, amount);
+        // console.log(name, email, phone, amount);
+        const billInfo = { name, email, phone, amount };
+
+        postMethod('http://localhost:5000/api/addBill', billInfo, e, setShow);
 
     }
     
@@ -69,10 +76,10 @@ const AddModal = ({ show, handleClose }) => {
                                 required
                             />
                         </Form.Group>
-                        <Button variant="secondary" onClick={handleClose}>
+                        <Button variant="danger" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" type="submit">
+                        <Button className="mx-3" variant="primary" type="submit">
                             Submit
                         </Button>
                        

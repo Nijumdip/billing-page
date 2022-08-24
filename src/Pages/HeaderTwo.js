@@ -10,7 +10,7 @@ const HeaderTwo = () => {
 
     return (
         <div>
-        <Navbar bg="secondary" expand="lg" className=' m-5 bg-secondary py-1'>
+        <Navbar bg="secondary" expand="lg" className=' mt-5 mb-3 bg-secondary py-1'>
         <Container>
           <Navbar.Brand href="#" className='text-light fw-bold fs-5'>Billings</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -33,6 +33,7 @@ const HeaderTwo = () => {
             </Button>
               <AddModal
                 show={show}
+                setShow={setShow}
                 handleClose={handleClose}
               ></AddModal>
           </Navbar>
