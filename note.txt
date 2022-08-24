@@ -1,0 +1,24 @@
+1. button form এর বাইরে রাখছিলাম
+
+2. phn input এটা ভুল করেছি {
+    pattern="[0-9]{11}"   
+    maxLength="11"   
+} 
+3. useRef এর ref={nameRef} টার পরিবর্তে ref="nameRef" এটা লিখে ফেলেছি
+4. Button এর  type="submit" লিখতে ভুল করেছি
+
+
+
+
+
+------------------>new ja ja add koreci ------------>
+
+1.  Modal HeaderTwo component থেকে AddModal component এ share করেছি 
+  <AddModal
+        show={show}
+        handleClose={handleClose}
+    ></AddModal> 
+
+2.  useRef use koreci input field theke
+3.  
+
