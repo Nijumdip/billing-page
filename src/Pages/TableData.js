@@ -5,7 +5,7 @@ import EditModal from './EditModal';
 
 const TableData = ({ bill }) => {
 
-    console.log(bill);
+    // console.log(bill);
 
     const { deleteMethod } = useFetch();
 

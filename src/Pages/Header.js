@@ -1,9 +1,25 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-
+import React, { useEffect, useState } from "react";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import useFetch from "../Hooks/useFetch";
 
 const Header = () => {
+  const [total, setTotal] = useState(0);
+
+  const { allBills, getMethod } = useFetch();
+
+  useEffect(() => {
+    getMethod(`http://localhost:5000/api/allBill`);
+    // console.log(allBills);
+    
+    let totalAmount = 0;
+    allBills?.forEach((bill) => {
+      const total = (totalAmount += parseInt(bill.amount));
+      // console.log(total);
+      setTotal(total);
+    });
+  }, [allBills, getMethod]);
+  
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -16,10 +32,8 @@ const Header = () => {
               height="82"
               className="d-inline-block align-top"
             />
-            </Navbar.Brand>
-            <div className='text-light fw-bold fs-3'>
-              Total Paid: 
-            </div>
+          </Navbar.Brand>
+          <div className="text-light fw-bold fs-3">Total Paid: {total}</div>
         </Container>
       </Navbar>
     </div>
