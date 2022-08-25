@@ -8,15 +8,15 @@ const Home = () => {
   const { getMethod, allBills } = useFetch();
 
   useEffect(() => {
-    getMethod("http://localhost:5000/api/allBill");
-  }, [])
-  
+    getMethod("https://desolate-shore-09715.herokuapp.com/api/allBill");
+  }, []);
+
   // console.log(allBills);
-  
+
   return (
     <div className="mx-5">
       <HeaderTwo />
-      <Table striped bordered hover variant="dark" >
+      <Table striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>Billing Id</th>
@@ -28,12 +28,9 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-        {
-            allBills?.map((bill) => <TableData 
-                key={bill._id}
-                bill={bill}
-            ></TableData>
-          )}
+          {allBills?.map((bill) => (
+            <TableData key={bill._id} bill={bill}></TableData>
+          ))}
         </tbody>
       </Table>
     </div>

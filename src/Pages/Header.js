@@ -9,7 +9,7 @@ const Header = () => {
   const { allBills, getMethod } = useFetch();
 
   useEffect(() => {
-    getMethod(`http://localhost:5000/api/allBill`);
+    getMethod(`https://desolate-shore-09715.herokuapp.com/api/allBill`);
     // console.log(allBills);
     
     let totalAmount = 0;
@@ -19,7 +19,7 @@ const Header = () => {
       setTotal(total);
     });
   }, [allBills, getMethod]);
-  
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">

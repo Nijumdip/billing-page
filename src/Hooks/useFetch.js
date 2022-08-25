@@ -99,7 +99,7 @@ const useFetch = () => {
         })
         .then(res=>res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if (data.acknowledged) {
                 toast.success('Wow so easily add this bill!');
                 e.target.reset();

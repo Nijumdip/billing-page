@@ -3,10 +3,10 @@ import { Button, Form, Modal } from "react-bootstrap";
 import useFetch from "../Hooks/useFetch";
 
 const EditModal = ({ bill, show, setShow, handleClose }) => {
-    const {putMethod}=useFetch()
+  const { putMethod } = useFetch();
   const { _id, name, email, phone, amount } = bill;
 
-    // console.log(phone, amount);
+  // console.log(phone, amount);
   const nameRef = useRef();
   const emailRef = useRef();
   const phoneRef = useRef();
@@ -19,8 +19,13 @@ const EditModal = ({ bill, show, setShow, handleClose }) => {
     const phone = phoneRef.current.value;
     const amount = amountRef.current.value;
     const data = { name, email, phone, amount };
-    console.log(data);
-      putMethod(`http://localhost:5000/api/updateBill/${_id}`, data, e, setShow)
+    // console.log(data);
+    putMethod(
+      `https://desolate-shore-09715.herokuapp.com/api/updateBill/${_id}`,
+      data,
+      e,
+      setShow
+    );
   };
   return (
     <Modal show={show} onHide={handleClose}>
