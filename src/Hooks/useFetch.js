@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const useFetch = () => {
     /* const blogs = [
@@ -24,17 +25,20 @@ const useFetch = () => {
 
     const [allBills, setAllBills] = useState();
 
+    // <-------------- get method from Home page-------------->
     const getMethod=(url) => {
         fetch(url)
         .then(res=>res.json())
         .then(data => {
             // console.log(data);
             setAllBills(data);
-        })
-         
+        })  
     }
+    // <-------------- get method from Home page -------------->
 
-    const postMethod = (url, billInfo, e) => {
+
+    // <-------------- post method from AddModal page -------------->
+    const postMethod = (url, billInfo, e, setShow) => {
         fetch(url, {
             method: "POST",
             headers: {
@@ -43,16 +47,80 @@ const useFetch = () => {
             body:JSON.stringify(billInfo),
         })
         .then(res=>res.json())
-            .then(data => {
-                setAllBills(data)
-            console.log(allBills);
+        .then(data => {
+            console.log(data);
+            if (data.acknowledged) {
+                toast.success('Wow so easily add this bill!');
+                e.target.reset();
+                setShow(false);
+            }
+            else {
+                toast.error('Something went wrong. Please try again !');
+                setShow(false);
+            }
         })
     }  
+    // <-------------- post method from AddModal page -------------->
+
+
+    // <-------------- Delete  method from TableData page-------------->
+    const deleteMethod = (url) => {
+        if (window.confirm('do you want to delete this data ?') === true) {
+            fetch(url, {
+                method:"DELETE"
+            })
+            .then(res=>res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('Wow so easily add this bill!');
+                }
+                else {
+                    toast.error('Something went wrong. Please try again !');
+                }
+            })
+        }
+        else {
+            toast.error('You canceled!');
+        }
+    }
+    // <-------------- Delete  method from TableData page -------------->
+
+
+
+    // <-------------- put  method form EditModal -------------->
+    const putMethod = (url,  data, e, setShow) => {
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify(data)
+        })
+        .then(res=>res.json())
+        .then(data => {
+            console.log(data);
+            if (data.acknowledged) {
+                toast.success('Wow so easily add this bill!');
+                e.target.reset();
+                setShow(false);
+            }
+            else {
+                toast.error('Something went wrong. Please try again !');
+                setShow(false);
+            }
+        })
+    }
+
+    // <-------------- put  method form EditModal -------------->
 
     return {
         allBills,
         setAllBills,
-        getMethod
+        getMethod,
+        postMethod,
+        deleteMethod,
+        putMethod
     }
 };
 

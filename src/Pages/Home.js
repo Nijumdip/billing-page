@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import useFetch from "../Hooks/useFetch";
 import HeaderTwo from "./HeaderTwo";
@@ -7,8 +7,12 @@ import TableData from "./TableData";
 const Home = () => {
   const { getMethod, allBills } = useFetch();
 
-  getMethod("http://localhost:5000/api/addBill");
-
+  useEffect(() => {
+    getMethod("http://localhost:5000/api/allBill");
+  }, [])
+  
+  // console.log(allBills);
+  
   return (
     <div className="mx-5">
       <HeaderTwo />

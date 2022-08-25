@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import useFetch from '../Hooks/useFetch';
+import EditModal from './EditModal';
 
 const TableData = ({ bill }) => {
+
     console.log(bill);
-    const { _id, name, email, phoneNumber, paidAmount } = bill;
+
+    const { deleteMethod } = useFetch();
+
+    const handleDelete = () => {
+        deleteMethod(`http://localhost:5000/api/deleteBill/${bill._id}`)
+    }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    // console.log(bill);
+    const { _id, name, email, phone, amount } = bill;
     return (
         <tr>
             <td>{_id}</td>
             <td>{name}</td>
             <td>{email}</td>
-            <td>{phoneNumber}</td>
-            <td>{paidAmount}</td>
-            <td>
-                <Button className="mx-2" variant="primary" type="submit">
+            <td>{phone}</td>
+            <td>{amount}</td>
+            <td  className="d-flex justify-content-center align-items-center ">
+                <div>
+                   <Button className="mx-2" variant="primary" onClick={()=>handleShow(bill)}>
                     Edit
                 </Button>
-                <Button variant="danger" >
+                <EditModal
+                    bill={bill}
+                    show={show}
+                    setShow={setShow}
+                    handleClose={handleClose}
+                ></EditModal>
+                </div>
+                <Button variant="danger" onClick={handleDelete} >
                     Delete
                 </Button>
             </td>

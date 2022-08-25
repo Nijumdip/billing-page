@@ -11,7 +11,7 @@
 
 
 
------------------->new ja ja add koreci ------------>
+------------------>new or ja ja add koreci ------------>
 
 1.  Modal HeaderTwo component থেকে AddModal component এ share করেছি 
   <AddModal
@@ -20,5 +20,5 @@
     ></AddModal> 
 
 2.  useRef use koreci input field theke
-3.  
+3.  React-Toastify
 
